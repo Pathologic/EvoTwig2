@@ -188,6 +188,7 @@ class Plugin
         }
         if (empty($method)) return;
         $fs = FS::getInstance();
+        if (!$fs->checkDir($path)) $fs->makeDir($path);
 	    foreach (scandir(MODX_BASE_PATH . $path) as $item) {
 	        if ($item == '.' || $item == '..') continue;
 	        if(substr($item,-4) === '.php') {

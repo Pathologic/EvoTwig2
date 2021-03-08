@@ -1,24 +1,24 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => 'No version set (parsed as 1.0.0)',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-master',
+    'version' => 'dev-master',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
+    'reference' => '8f694ad598da35551bebb259353725c110654530',
     'name' => '__root__',
   ),
   'versions' => 
   array (
     '__root__' => 
     array (
-      'pretty_version' => 'No version set (parsed as 1.0.0)',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => '8f694ad598da35551bebb259353725c110654530',
     ),
     'doctrine/cache' => 
     array (
@@ -31,12 +31,12 @@
     ),
     'pathologic/evo-twig-lib' => 
     array (
-      'pretty_version' => '2.0.1',
-      'version' => '2.0.1.0',
+      'pretty_version' => '2.0.2',
+      'version' => '2.0.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e84c9f6d96a1e2aa02db917eac9dd9a2d6d7688f',
+      'reference' => 'd8834ba048b0de994e05586ce340b1058f5c7019',
     ),
     'psr/cache' => 
     array (
