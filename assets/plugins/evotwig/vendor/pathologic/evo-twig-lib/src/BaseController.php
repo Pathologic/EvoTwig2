@@ -20,10 +20,6 @@ class BaseController implements ControllerInterface
     {
         $this->modx = $modx;
         $this->params = $params;
-        $this->setTemplateData([
-            'placeholders'   => &$modx->placeholders,
-            '_SESSION'       => &$_SESSION,
-        ]);
     }
 
     /**

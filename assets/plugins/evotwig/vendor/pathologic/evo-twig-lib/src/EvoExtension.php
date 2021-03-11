@@ -28,10 +28,65 @@ class EvoExtension extends AbstractExtension implements GlobalsInterface
             'debug'          => $this->params['debug'],
             'config'         => $this->modx->config,
             'ajax'           => isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest',
+            'plh'            => new class($this->modx) implements \ArrayAccess {
+                private $modx;
+
+                public function __construct(\DocumentParser $modx)
+                {
+                    $this->modx = $modx;
+                }
+
+                public function offsetExists($offset)
+                {
+                    return isset($this->modx->placeholders);
+                }
+
+                public function offsetGet($offset)
+                {
+                    return $this->modx->getPlaceholder($offset);
+                }
+
+                public function offsetSet($offset, $value)
+                {
+                }
+
+                public function offsetUnset($offset)
+                {
+                }
+
+                public function toArray()
+                {
+                    return $this->modx->placeholders;
+                }
+            },
             '_GET'           => $_GET,
             '_POST'          => $_POST,
-            '_REQUEST'       => $_POST,
+            '_REQUEST'       => $_REQUEST,
             '_COOKIE'        => $_COOKIE,
+            '_SESSION'       => new class implements \ArrayAccess {
+                public function offsetExists($offset)
+                {
+                    return isset($_SESSION[$offset]);
+                }
+
+                public function offsetGet($offset)
+                {
+                    return $_SESSION[$offset] ?? null;
+                }
+
+                public function offsetSet($offset, $value)
+                {
+                }
+
+                public function offsetUnset($offset)
+                {
+                }
+
+                public function toArray()
+                {
+                    return $_SESSION;
+                }
+            }
         ];
     }
 

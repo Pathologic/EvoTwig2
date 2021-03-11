@@ -62,6 +62,11 @@ Available template variables are:
 * debug - true if debug mode is enabled;
 * ajax - true if page is requested with ajax.
 
+If you need to get the whole "plh" or "_SESSION" array, then use toArray() method:
+```
+{{ dump(_SESSION.toArray()) }}
+```
+
 Some Evo specific functions and filters are added:
 ```
 {{ runSnippet('SnippetName',{
