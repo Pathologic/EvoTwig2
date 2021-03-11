@@ -38,7 +38,7 @@ class EvoExtension extends AbstractExtension implements GlobalsInterface
 
                 public function offsetExists($offset)
                 {
-                    return isset($this->modx->placeholders);
+                    return isset($this->modx->placeholders[$offset]);
                 }
 
                 public function offsetGet($offset)
