@@ -105,17 +105,17 @@
         },
         {
             "name": "pathologic/evo-twig-lib",
-            "version": "2.1.0",
-            "version_normalized": "2.1.0.0",
+            "version": "2.1.1",
+            "version_normalized": "2.1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Pathologic/evo-twig-lib.git",
-                "reference": "933fa1b4ba36afa28aeb71930bb5100911ccf46e"
+                "reference": "3b5cd32d4340003edf71cc76399ee56e1800da45"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Pathologic/evo-twig-lib/zipball/933fa1b4ba36afa28aeb71930bb5100911ccf46e",
-                "reference": "933fa1b4ba36afa28aeb71930bb5100911ccf46e",
+                "url": "https://api.github.com/repos/Pathologic/evo-twig-lib/zipball/3b5cd32d4340003edf71cc76399ee56e1800da45",
+                "reference": "3b5cd32d4340003edf71cc76399ee56e1800da45",
                 "shasum": ""
             },
             "require": {
@@ -123,7 +123,7 @@
                 "twig/cache-extra": "^3.0",
                 "twig/twig": "^3.0"
             },
-            "time": "2021-03-13T10:38:13+00:00",
+            "time": "2021-03-13T21:41:34+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -144,7 +144,7 @@
             "description": "Libraries to run EvoTwig plugin for Evolution CMS",
             "support": {
                 "issues": "https://github.com/Pathologic/evo-twig-lib/issues",
-                "source": "https://github.com/Pathologic/evo-twig-lib/tree/2.1.0"
+                "source": "https://github.com/Pathologic/evo-twig-lib/tree/2.1.1"
             },
             "install-path": "../pathologic/evo-twig-lib"
         },

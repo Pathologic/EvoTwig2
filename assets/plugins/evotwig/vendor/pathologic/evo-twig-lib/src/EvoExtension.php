@@ -23,7 +23,7 @@ class EvoExtension extends AbstractExtension implements GlobalsInterface
     {
         return [
             'modx'           => $this->modx,
-            'documentObject' => $this->modx->documentObject,
+            'documentObject' => $this->modx->documentObject ?? [],
             'resource'       => $this->getResource(),
             'debug'          => $this->params['debug'],
             'config'         => $this->modx->config,
@@ -121,8 +121,10 @@ class EvoExtension extends AbstractExtension implements GlobalsInterface
     private function getResource()
     {
         $resource = [];
-        foreach ($this->modx->documentObject as $key => $value) {
-            $resource[$key] = is_array($value) ? $value[1] : $value;
+        if (!empty($this->modx->documentObject)) {
+            foreach ($this->modx->documentObject as $key => $value) {
+                $resource[$key] = is_array($value) ? $value[1] : $value;
+            }
         }
 
         return $resource;
