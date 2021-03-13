@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '0ba09576196b372aeb5f7566d94649f9e00f0ae8',
+    'reference' => '609f3fd8677dada69f04ccdb658281e8628a3d05',
     'name' => '__root__',
   ),
   'versions' => 
@@ -31,7 +31,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '0ba09576196b372aeb5f7566d94649f9e00f0ae8',
+      'reference' => '609f3fd8677dada69f04ccdb658281e8628a3d05',
     ),
     'doctrine/cache' => 
     array (
@@ -44,12 +44,12 @@ private static $installed = array (
     ),
     'pathologic/evo-twig-lib' => 
     array (
-      'pretty_version' => '2.0.3',
-      'version' => '2.0.3.0',
+      'pretty_version' => '2.1.0',
+      'version' => '2.1.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '4322191a629bcddba4d68bea80949a5d337312fb',
+      'reference' => '933fa1b4ba36afa28aeb71930bb5100911ccf46e',
     ),
     'psr/cache' => 
     array (

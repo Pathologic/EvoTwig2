@@ -67,7 +67,7 @@ If you need to get the whole "plh" or "_SESSION" array, then use toArray() metho
 {{ dump(_SESSION.toArray()) }}
 ```
 
-Some Evo specific functions and filters are added:
+Some Evo specific functions are added:
 ```
 {{ runSnippet('SnippetName',{
      'param1':'value',
@@ -80,8 +80,6 @@ Some Evo specific functions and filters are added:
 {{ parseChunk('chunkName', {'foo':'bar','bar':'baz'}) }}
 
 {{ parseChunk('@CODE:[+foo+] is bar, [+bar+] is baz', {'foo':'bar','bar':'baz'}) }}
-
-{{ '[*pagetitle*] [(site_name)] [!snippet!] {{chunk}}' | modxParser }}
 
 {{ makeUrl(2) }}
 {{ makeUrl(2, {foo: 'bar'}) }}

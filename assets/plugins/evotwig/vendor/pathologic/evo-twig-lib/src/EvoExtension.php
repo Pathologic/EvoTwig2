@@ -113,33 +113,9 @@ class EvoExtension extends AbstractExtension implements GlobalsInterface
         return $functions;
     }
 
-    public function getFilters(): array
-    {
-        $filters = [];
-        $filters[] = new TwigFilter('modxParser', [
-            $this,
-            'modxParser'
-        ]);
-
-        return $filters;
-    }
-
     public function makeUrl($id, array $args = [], $absolute = false): string
     {
         return $this->modx->makeUrl($id, '', http_build_query($args), $absolute ? 'full' : '');
-    }
-
-    public function modxParser($content): string
-    {
-        $this->modx->minParserPasses = 2;
-        $this->modx->maxParserPasses = 10;
-
-        $out = $this->modx->tpl->parseDocumentSource($content, $this->modx);
-
-        $this->modx->minParserPasses = -1;
-        $this->modx->maxParserPasses = -1;
-
-        return $out;
     }
 
     private function getResource()
