@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e8fc11c6164f26d6b48cd8e768c90d37",
+    "content-hash": "8780487ada1c5858023c3f382468909c",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -108,16 +108,16 @@
         },
         {
             "name": "pathologic/evo-twig-lib",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Pathologic/evo-twig-lib.git",
-                "reference": "3b5cd32d4340003edf71cc76399ee56e1800da45"
+                "reference": "08d5dd4a96ab4be2942d4e9dcad945f29b9499b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Pathologic/evo-twig-lib/zipball/3b5cd32d4340003edf71cc76399ee56e1800da45",
-                "reference": "3b5cd32d4340003edf71cc76399ee56e1800da45",
+                "url": "https://api.github.com/repos/Pathologic/evo-twig-lib/zipball/08d5dd4a96ab4be2942d4e9dcad945f29b9499b6",
+                "reference": "08d5dd4a96ab4be2942d4e9dcad945f29b9499b6",
                 "shasum": ""
             },
             "require": {
@@ -144,9 +144,9 @@
             "description": "Libraries to run EvoTwig plugin for Evolution CMS",
             "support": {
                 "issues": "https://github.com/Pathologic/evo-twig-lib/issues",
-                "source": "https://github.com/Pathologic/evo-twig-lib/tree/2.1.1"
+                "source": "https://github.com/Pathologic/evo-twig-lib/tree/2.1.2"
             },
-            "time": "2021-03-13T21:41:34+00:00"
+            "time": "2021-03-15T09:06:21+00:00"
         },
         {
             "name": "psr/cache",

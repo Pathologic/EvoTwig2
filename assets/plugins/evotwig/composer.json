@@ -1,5 +1,5 @@
 {
   "require": {
-    "pathologic/evo-twig-lib": "^2.0"
+    "pathologic/evo-twig-lib": "^2.1"
   }
 }

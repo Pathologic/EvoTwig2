@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '0b687a30169e639bdd822e3b425cced5e59cff5e',
+    'reference' => '4bf769ab4619b6d8b65604c042624b5a8fe65124',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '0b687a30169e639bdd822e3b425cced5e59cff5e',
+      'reference' => '4bf769ab4619b6d8b65604c042624b5a8fe65124',
     ),
     'doctrine/cache' => 
     array (
@@ -31,12 +31,12 @@
     ),
     'pathologic/evo-twig-lib' => 
     array (
-      'pretty_version' => '2.1.1',
-      'version' => '2.1.1.0',
+      'pretty_version' => '2.1.2',
+      'version' => '2.1.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '3b5cd32d4340003edf71cc76399ee56e1800da45',
+      'reference' => '08d5dd4a96ab4be2942d4e9dcad945f29b9499b6',
     ),
     'psr/cache' => 
     array (
