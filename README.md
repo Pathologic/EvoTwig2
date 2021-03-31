@@ -34,7 +34,7 @@ Create autoload entries in assets/composer.json if needed, then run "composer up
 * templatesExtension - extension of the template file, default is "tpl";
 * templatesCachePath - path to the folder containing templates cache;
 * dataCachePath - path to the folder containing data cache if Filesystem Cache driver is used;
-* namespace - namespace of controller classes;
+* baseController - base controller class;
 * allowedFunctions - allowed php functions to use as functions in Twig templates, comma separated;
 * allowedFilters - allowed php functions to use as filters in Twig templates, comma separated;
 * debug - enables debug mode;
@@ -101,7 +101,7 @@ Template variables in chunks depend on snippets code. For example, DocLister chu
 All extensions are placed in "assets/plugins/evotwig/addons/" folder according to their type. See Twig documentation and existing extensions code.
 
 ### Controllers
-You may use controller classes to add template variables. All controller classes should extend \Pathologic\EvoTwig\BaseController class.
+You may use controller classes to add custom template variables. All controller classes should implement \Pathologic\EvoTwig\ControllerInterface.
 
 ### Using cache
 Cache provide is available via $modx->cache property:

@@ -113,6 +113,16 @@ class EvoExtension extends AbstractExtension implements GlobalsInterface
         return $functions;
     }
 
+    public function getFilters(): array
+    {
+        $filters = [];
+        $filters[] = new TwigFilter('url', function($id, $absolute = false) {
+            return $this->makeUrl($id, [], $absolute);
+        });
+
+        return $filters;
+    }
+
     public function makeUrl($id, array $args = [], $absolute = false): string
     {
         return $this->modx->makeUrl($id, '', http_build_query($args), $absolute ? 'full' : '');

@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '4bf769ab4619b6d8b65604c042624b5a8fe65124',
+    'reference' => '11396df30f30c05d90ed84643d3ffc9000b61fb3',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '4bf769ab4619b6d8b65604c042624b5a8fe65124',
+      'reference' => '11396df30f30c05d90ed84643d3ffc9000b61fb3',
     ),
     'doctrine/cache' => 
     array (
@@ -31,12 +31,12 @@
     ),
     'pathologic/evo-twig-lib' => 
     array (
-      'pretty_version' => '2.1.2',
-      'version' => '2.1.2.0',
+      'pretty_version' => '2.2.0',
+      'version' => '2.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '08d5dd4a96ab4be2942d4e9dcad945f29b9499b6',
+      'reference' => 'd52405c2e6ba1da80f73ecf0213b837ba1bba9e3',
     ),
     'psr/cache' => 
     array (
@@ -81,12 +81,12 @@
     ),
     'symfony/cache' => 
     array (
-      'pretty_version' => 'v5.2.4',
-      'version' => '5.2.4.0',
+      'pretty_version' => 'v5.2.6',
+      'version' => '5.2.6.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'd15fb2576cdbe2c40d7c851e62f85b0faff3dd3d',
+      'reference' => '093d69bb10c959553c8beb828b8d4ea250a247dd',
     ),
     'symfony/cache-contracts' => 
     array (

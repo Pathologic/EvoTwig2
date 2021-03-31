@@ -19,18 +19,28 @@ class Plugin
     protected $addonsPath = 'assets/plugins/evotwig/addons/';
     protected $configPath = 'assets/plugins/evotwig/config/';
 
+    /**
+     * Plugin constructor.
+     * @param  \DocumentParser  $modx
+     * @param  array  $params
+     */
     public function __construct(\DocumentParser $modx, $params = [])
     {
         $this->modx = $modx;
         $this->params = $this->prepareParams($params);
     }
 
-    protected function prepareParams(array $params = [])
+    /**
+     * @param  array  $params
+     * @return array
+     */
+    protected function prepareParams(array $params = []): array
     {
         $params['templatesPath'] = $params['templatesPath'] ?? 'assets/templates/tpl/';
         $params['templatesExtension'] = $params['templatesExtension'] ?? 'tpl';
         $params['templatesCachePath'] = $params['templatesCachePath'] ?? 'assets/cache/templates/';
-        $params['controllersNamespace'] = $params['controllersNamespace'] ?? __NAMESPACE__;
+        $params['baseController'] = $params['baseController'] ?? 'Pathologic\\EvoTwig\\BaseController';
+        $params['baseController'] = $this->checkController($params['baseController']) ? $params['baseController'] : 'Pathologic\\EvoTwig\\BaseController';
         $params['dataCachePath'] = $params['dataCachePath'] ?? 'assets/cache/data/';
         $params['allowedFunctions'] = $params['allowedFunctions'] ?? '';
         $params['allowedFilters'] = $params['allowedFilters'] ?? '';
@@ -109,11 +119,14 @@ class Plugin
         ]);
         $twig->addRuntimeLoader(new class($this->modx) implements RuntimeLoaderInterface {
             protected $modx;
+
             public function __construct(\DocumentParser $modx)
             {
                 $this->modx = $modx;
             }
-            public function load($class) {
+
+            public function load($class)
+            {
                 if (CacheRuntime::class === $class) {
                     return new CacheRuntime(new DoctrineAdapter($this->modx->cache));
                 }
@@ -131,13 +144,16 @@ class Plugin
         $this->modx->tpl->setTemplateExtension($this->params['templatesExtension']);
     }
 
-    public function initDLTemplate() {
+    public function initDLTemplate()
+    {
         $this->modx->tpl = \DLTemplate::getInstance($this->modx);
     }
 
     public function OnLoadWebDocument()
     {
-        if ($this->params['disableTwig'] === true) return;
+        if ($this->params['disableTwig'] === true) {
+            return;
+        }
         $template = $this->modx->documentObject['template'] ? $this->modx->documentContent : $this->modx->documentObject['content'];
         $template = $template ?: $this->modx->documentObject['content'];
         if (strpos($template, '@FILE:') === 0) {
@@ -146,11 +162,12 @@ class Plugin
             $template = substr($template, 6);
             $template = explode('@', $template, 2);
             if (!empty($template[1])) {
-                $controller = $this->params['controllersNamespace'] . '\\' . $template[1];
+                $namespace = (new \ReflectionClass($this->params['baseController']))->getNamespaceName();
+                $controller = $namespace . '\\' . $template[1];
             }
             $template = $template[0];
-            if (empty($controller) || !class_exists($controller) || !is_a($controller, 'Pathologic\EvoTwig\ControllerInterface', true)) {
-                $controller = 'Pathologic\EvoTwig\BaseController';
+            if (empty($controller) || !$this->checkController($controller)) {
+                $controller = $this->params['baseController'];
             }
             $controller = new $controller($this->modx, $this->params);
             $controller->setTemplate($template);
@@ -165,14 +182,17 @@ class Plugin
         }
     }
 
-    protected function loadAddons($type)
+    /**
+     * @param  string  $type
+     */
+    protected function loadAddons(string $type)
     {
         $modx = $this->modx;
-	    $twig = $this->modx->twig;
-	    $params = $this->params;
-	    $path = $this->addonsPath . $type . '/';
-	    $method = $class = '';
-	    switch ($type) {
+        $twig = $this->modx->twig;
+        $params = $this->params;
+        $path = $this->addonsPath . $type . '/';
+        $method = $class = '';
+        switch ($type) {
             case 'extensions':
                 $method = 'addExtension';
                 $class = 'Twig\Extension\AbstractExtension';
@@ -186,17 +206,25 @@ class Plugin
                 $class = 'Twig\TwigFilter';
                 break;
         }
-        if (empty($method)) return;
+        if (empty($method)) {
+            return;
+        }
         $fs = FS::getInstance();
-        if (!$fs->checkDir($path)) $fs->makeDir($path);
-	    foreach (scandir(MODX_BASE_PATH . $path) as $item) {
-	        if ($item == '.' || $item == '..') continue;
-	        if(substr($item,-4) === '.php') {
-	            $file = $path . $item;
-	            if (!$fs->checkFile($file)) continue;
-	            $addon = require(MODX_BASE_PATH . $file);
-	            if (is_a($addon, $class, true)) {
-	                $twig->$method($addon);
+        if (!$fs->checkDir($path)) {
+            $fs->makeDir($path);
+        }
+        foreach (scandir(MODX_BASE_PATH . $path) as $item) {
+            if ($item == '.' || $item == '..') {
+                continue;
+            }
+            if (substr($item, -4) === '.php') {
+                $file = $path . $item;
+                if (!$fs->checkFile($file)) {
+                    continue;
+                }
+                $addon = require(MODX_BASE_PATH . $file);
+                if (is_a($addon, $class, true)) {
+                    $twig->$method($addon);
                 }
             }
         }
@@ -277,10 +305,10 @@ class Plugin
         $this->modx->setConditional();
 
         // invoke OnWebPagePrerender event
-            $evtOut = $this->modx->invokeEvent('OnWebPagePrerender', array('documentOutput' => $this->modx->documentOutput));
-            if (is_array($evtOut) && count($evtOut) > 0) {
-                $this->modx->documentOutput = $evtOut['0'];
-            }
+        $evtOut = $this->modx->invokeEvent('OnWebPagePrerender', ['documentOutput' => $this->modx->documentOutput]);
+        if (is_array($evtOut) && count($evtOut) > 0) {
+            $this->modx->documentOutput = $evtOut['0'];
+        }
 
         $this->modx->documentOutput = $this->modx->removeSanitizeSeed($this->modx->documentOutput);
 
@@ -292,7 +320,9 @@ class Plugin
 
     public function OnBeforeLoadDocumentObject()
     {
-        if (!$this->params['cacheDocumentObject']) return;
+        if (!$this->params['cacheDocumentObject']) {
+            return;
+        }
         $identifier = $this->params['identifier'];
         $key = 'documentObject' . $identifier;
         if (!$documentObject = $this->modx->cache->fetch($key)) {
@@ -303,33 +333,49 @@ class Plugin
         $this->modx->event->setOutput($documentObject);
     }
 
-    protected function getDocumentObject($id)
+    /**
+     * @param $id
+     * @return array
+     */
+    protected function getDocumentObject($id): array
     {
         $modx = $this->modx;
         if (is_array($modx->documentObject) && $id === $modx->documentObject['id']) {
             $documentObject = $modx->documentObject;
         } else {
-            $documentObject = $modx->db->query("SELECT * FROM ".$modx->getFullTableName('site_content')." WHERE id = ".(int)$id);
+            $documentObject = $modx->db->query("SELECT * FROM " . $modx->getFullTableName('site_content') . " WHERE id = " . (int) $id);
             $documentObject = $modx->db->getRow($documentObject);
         }
-        if($documentObject === null) $documentObject = array();
-        else {
-            $rs = $modx->db->select("tv.*, IF(tvc.value!='',tvc.value,tv.default_text) as value", $modx->getFullTableName("site_tmplvars") . " tv
+        if ($documentObject === null) {
+            $documentObject = [];
+        } else {
+            $rs = $modx->db->select("tv.*, IF(tvc.value!='',tvc.value,tv.default_text) as value",
+                $modx->getFullTableName("site_tmplvars") . " tv
                     INNER JOIN " . $modx->getFullTableName("site_tmplvar_templates") . " tvtpl ON tvtpl.tmplvarid = tv.id
-                    LEFT JOIN " . $modx->getFullTableName("site_tmplvar_contentvalues") . " tvc ON tvc.tmplvarid=tv.id AND tvc.contentid = '{$documentObject['id']}'", "tvtpl.templateid = '{$documentObject['template']}'");
-            $tmplvars = array();
+                    LEFT JOIN " . $modx->getFullTableName("site_tmplvar_contentvalues") . " tvc ON tvc.tmplvarid=tv.id AND tvc.contentid = '{$documentObject['id']}'",
+                "tvtpl.templateid = '{$documentObject['template']}'");
+            $tmplvars = [];
             while ($row = $modx->db->getRow($rs)) {
-                $tmplvars[$row['name']] = array(
+                $tmplvars[$row['name']] = [
                     $row['name'],
                     $row['value'],
                     $row['display'],
                     $row['display_params'],
                     $row['type']
-                );
+                ];
             }
             $documentObject = array_merge($documentObject, $tmplvars);
         }
 
         return $documentObject;
+    }
+
+    /**
+     * @param $controller
+     * @return bool
+     */
+    protected function checkController($controller): bool
+    {
+        return class_exists($controller) && is_a($controller, 'Pathologic\EvoTwig\ControllerInterface', true);
     }
 }

@@ -105,17 +105,17 @@
         },
         {
             "name": "pathologic/evo-twig-lib",
-            "version": "2.1.2",
-            "version_normalized": "2.1.2.0",
+            "version": "2.2.0",
+            "version_normalized": "2.2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Pathologic/evo-twig-lib.git",
-                "reference": "08d5dd4a96ab4be2942d4e9dcad945f29b9499b6"
+                "reference": "d52405c2e6ba1da80f73ecf0213b837ba1bba9e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Pathologic/evo-twig-lib/zipball/08d5dd4a96ab4be2942d4e9dcad945f29b9499b6",
-                "reference": "08d5dd4a96ab4be2942d4e9dcad945f29b9499b6",
+                "url": "https://api.github.com/repos/Pathologic/evo-twig-lib/zipball/d52405c2e6ba1da80f73ecf0213b837ba1bba9e3",
+                "reference": "d52405c2e6ba1da80f73ecf0213b837ba1bba9e3",
                 "shasum": ""
             },
             "require": {
@@ -123,7 +123,7 @@
                 "twig/cache-extra": "^3.0",
                 "twig/twig": "^3.0"
             },
-            "time": "2021-03-15T09:06:21+00:00",
+            "time": "2021-03-31T04:44:56+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -144,7 +144,7 @@
             "description": "Libraries to run EvoTwig plugin for Evolution CMS",
             "support": {
                 "issues": "https://github.com/Pathologic/evo-twig-lib/issues",
-                "source": "https://github.com/Pathologic/evo-twig-lib/tree/2.1.2"
+                "source": "https://github.com/Pathologic/evo-twig-lib/tree/2.2.0"
             },
             "install-path": "../pathologic/evo-twig-lib"
         },
@@ -306,17 +306,17 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v5.2.4",
-            "version_normalized": "5.2.4.0",
+            "version": "v5.2.6",
+            "version_normalized": "5.2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "d15fb2576cdbe2c40d7c851e62f85b0faff3dd3d"
+                "reference": "093d69bb10c959553c8beb828b8d4ea250a247dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/d15fb2576cdbe2c40d7c851e62f85b0faff3dd3d",
-                "reference": "d15fb2576cdbe2c40d7c851e62f85b0faff3dd3d",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/093d69bb10c959553c8beb828b8d4ea250a247dd",
+                "reference": "093d69bb10c959553c8beb828b8d4ea250a247dd",
                 "shasum": ""
             },
             "require": {
@@ -352,7 +352,7 @@
                 "symfony/messenger": "^4.4|^5.0",
                 "symfony/var-dumper": "^4.4|^5.0"
             },
-            "time": "2021-02-25T23:54:56+00:00",
+            "time": "2021-03-16T09:10:13+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -384,7 +384,7 @@
                 "psr6"
             ],
             "support": {
-                "source": "https://github.com/symfony/cache/tree/v5.2.4"
+                "source": "https://github.com/symfony/cache/tree/v5.2.6"
             },
             "funding": [
                 {
