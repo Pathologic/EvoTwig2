@@ -206,7 +206,7 @@ function twig_escape_filter(Environment $env, $string, $strategy = 'html', $char
 
     switch ($strategy) {
         case 'html':
-            // see https://secure.php.net/htmlspecialchars
+            // see https://www.php.net/htmlspecialchars
 
             // Using a static variable to avoid initializing the array
             // each time the function is called. Moving the declaration on the
@@ -277,7 +277,7 @@ function twig_escape_filter(Environment $env, $string, $strategy = 'html', $char
                     return $shortMap[$char];
                 }
 
-                $codepoint = mb_ord($char);
+                $codepoint = mb_ord($char, 'UTF-8');
                 if (0x10000 > $codepoint) {
                     return sprintf('\u%04X', $codepoint);
                 }
@@ -387,13 +387,8 @@ function twig_escape_filter(Environment $env, $string, $strategy = 'html', $char
             return rawurlencode($string);
 
         default:
-            static $escapers;
-
-            if (null === $escapers) {
-                $escapers = $env->getExtension(EscaperExtension::class)->getEscapers();
-            }
-
-            if (isset($escapers[$strategy])) {
+            $escapers = $env->getExtension(EscaperExtension::class)->getEscapers();
+            if (array_key_exists($strategy, $escapers)) {
                 return $escapers[$strategy]($env, $string, $charset);
             }
 
