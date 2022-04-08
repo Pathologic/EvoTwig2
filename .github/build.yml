@@ -1,0 +1,40 @@
+name: Build EvoTwig
+
+on:
+  push:
+    tags:
+      - "*"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: cd assets/plugins/evotwig && composer install --no-dev --optimize-autoloader
+      - name: Create zip
+        run: zip -r evotwig.zip . -x ".*/*" "/.*" "README.md"
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./evotwig.zip
+          asset_name: evotwig${{ github.ref_name }}.zip
+          asset_content_type: application/zip
