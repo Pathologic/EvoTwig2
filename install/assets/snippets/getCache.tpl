@@ -5,7 +5,7 @@
  * Snippet to cache other snippets calls
  *
  * @category    snippet
- * @version     2.3.0
+ * @version     2.3.2
  * @license     http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  * @author      Pathologic
  * @internal    @properties 
